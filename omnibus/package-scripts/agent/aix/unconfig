@@ -23,18 +23,14 @@ set -e
 
 stop_datadog_services()
 {
-  set +e
-  stopsrc -s ${SERVICE_NAME} > /dev/null 2>&1
-  set -e
+    stopsrc -s ${SERVICE_NAME} > /dev/null 2>&1 || true
 }
 
 remove_system_services()
 {
-    # best effort
-    set +e
-    rmitab ${SERVICE_NAME} > /dev/null
-    rmssys -s ${SERVICE_NAME} > /dev/null
-    set -e
+    # best effort — use || true so individual failures don't abort the script
+    rmitab ${SERVICE_NAME} > /dev/null 2>&1 || true
+    rmssys -s ${SERVICE_NAME} > /dev/null 2>&1 || true
 }
 
 stop_datadog_services
