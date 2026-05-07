@@ -67,7 +67,6 @@ This project follows [Semantic Versioning](https://semver.org/). The format is l
 
 ### Maintenance
 
-- Remove `.circleci` CI configuration ([#216](https://github.com/DataDog/datadog-unix-agent/pull/216))
 - Pin GitHub Actions to commit SHAs for supply-chain security ([#148](https://github.com/DataDog/datadog-unix-agent/pull/148))
 - Import omnibus software definitions directly into repo; remove external `omnibus-software` dependency ([#143](https://github.com/DataDog/datadog-unix-agent/pull/143))
 - Update supported AIX version list in documentation ([#142](https://github.com/DataDog/datadog-unix-agent/pull/142))
