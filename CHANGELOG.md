@@ -13,7 +13,8 @@ This project follows [Semantic Versioning](https://semver.org/). The format is l
 - Fix AIX postinstall script: use `set +e`/`set -e` guards around `odmdelete` and `startsrc` calls; create log directory on install
 - Fix AIX unconfig/prerm script: ksh88 `set -e` compatibility, fix syntax error, add explicit directory cleanup
 - Fix unconfig symlink check: use `if` statement instead of `set +e`/`set -e` pattern for reliability
-- Apply `|| true` cleanup in postinstall and set `disable_console_logging` default to `true` to avoid inittab stdout noise
+- Fix AIX package scripts: use `|| true` for best-effort SRC/inittab cleanup; prevents install failure when subsystem already registered ([#218](https://github.com/DataDog/datadog-unix-agent/pull/218))
+- Default `disable_console_logging` to `true`; on AIX the agent runs under SRC where console output goes to inittab/wtmp ([#217](https://github.com/DataDog/datadog-unix-agent/pull/217))
 
 ### Dependency Upgrades
 
@@ -45,7 +46,8 @@ This project follows [Semantic Versioning](https://semver.org/). The format is l
 
 ### New Features
 
-- Add gohai-like host metadata with AIX-focused collectors (CPU, memory, network, OS); payload sent every 10 minutes ([#155](https://github.com/DataDog/datadog-unix-agent/pull/155))
+- Send fleet host metadata payload every 10 minutes, aligning with the main Agent; prevents hosts from disappearing in Fleet Automation due to 1-hour TTL ([#145](https://github.com/DataDog/datadog-unix-agent/pull/145))
+- Add gohai-like host metadata with AIX-focused collectors (CPU, memory, network, OS) ([#155](https://github.com/DataDog/datadog-unix-agent/pull/155))
 - Add NTP check as a core check ([#150](https://github.com/DataDog/datadog-unix-agent/pull/150))
 - Add HTTP payload compression support; per-caller compression options in `RequestsWrapper` ([#154](https://github.com/DataDog/datadog-unix-agent/pull/154))
 - Add `disable_console_logging` configuration option to suppress stdout log output ([#147](https://github.com/DataDog/datadog-unix-agent/pull/147))
@@ -68,7 +70,9 @@ This project follows [Semantic Versioning](https://semver.org/). The format is l
 - Remove `.circleci` CI configuration ([#216](https://github.com/DataDog/datadog-unix-agent/pull/216))
 - Pin GitHub Actions to commit SHAs for supply-chain security ([#148](https://github.com/DataDog/datadog-unix-agent/pull/148))
 - Import omnibus software definitions directly into repo; remove external `omnibus-software` dependency ([#143](https://github.com/DataDog/datadog-unix-agent/pull/143))
-- Update supported AIX version list in documentation
+- Update supported AIX version list in documentation ([#142](https://github.com/DataDog/datadog-unix-agent/pull/142))
+- Fix bootstrap scripts: bundler DNS handling and machine setup ([#127](https://github.com/DataDog/datadog-unix-agent/pull/127), [#128](https://github.com/DataDog/datadog-unix-agent/pull/128))
+- Add `custom_queries` example for Japanese IBM WAS XML issue ([#130](https://github.com/DataDog/datadog-unix-agent/pull/130))
 
 ---
 
