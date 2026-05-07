@@ -13,7 +13,7 @@ end
 source :url => "https://github.com/giampaolo/psutil/archive/release-#{version}.tar.gz"
 
 version "5.9.8" do
-  source :sha256 => "6be126e3225486dff286a8fb9a06246a5253f4c7c53b475ea5f5ac934e64194c"
+  source :sha256 => "962fbb077209fda6416046b704b51ed17a61edde41a4573886640026e2c53bae"
 end
 
 relative_path "psutil-release-#{version}"
@@ -29,7 +29,6 @@ build do
   end
 
   if aix?
-    patch source: "aix-net-kernel-mbuf-header-fix.patch", plevel: 1
     patch source: "ignore-proc-status-not-readable.patch", plevel: 1
     env["M4"] = "/opt/freeware/bin/m4"
   end

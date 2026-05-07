@@ -17,7 +17,12 @@ build do
           with_standard_compiler_flags
         end
 
-  configure env: env
+  configure_args = ["--disable-nls"]
+  if aix?
+    configure_args << "--disable-dependency-tracking"
+    configure_args << "--build=powerpc-ibm-aix7.2.0.0"
+  end
+  configure(*configure_args, env: env)
 
   make env: env
   make "install", env: env

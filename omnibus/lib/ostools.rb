@@ -40,6 +40,10 @@ def aix_env()
     env["CXXFLAGS"] = "#{env["CXXFLAGS"].gsub('-q64', '')}"
     env["LDFLAGS"] = "#{env["LDFLAGS"].gsub('-q64', '')} -Wl,-brtl"
     env["NM"] = "/usr/bin/nm -X64"
+    # lslpp hangs on QEMU AIX (reads package DB via hardware path); pre-set the
+    # autoconf cache vars so AC_CACHE_CHECK skips config.guess entirely.
+    env["ac_cv_build"] = "powerpc-ibm-aix7.2.0.0"
+    env["ac_cv_host"]  = "powerpc-ibm-aix7.2.0.0"
 
     return env
 end
