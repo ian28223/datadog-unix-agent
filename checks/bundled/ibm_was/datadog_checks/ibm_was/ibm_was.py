@@ -130,7 +130,7 @@ class IbmWasCheck(AgentCheck):
     def submit_metrics(self, child, prefix, tags):
         value = child.get(metrics.METRIC_VALUE_FIELDS[child.tag])
         metric_name = self.normalize(
-            ensure_text(child.get('name')), prefix='{}.{}'.format(self.METRIC_PREFIX, prefix), fix_case=True
+            ensure_text(child.get('name') or ''), prefix='{}.{}'.format(self.METRIC_PREFIX, prefix), fix_case=True
         )
 
         tag = child.tag
